@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hw</title>
+    <style>
+        body{
+            background-color: lightblue;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Num 1：<input class="num-1" type="number">
+    </p>
+    <p>
+        Num 2：<input class="num-2" type="number">
+    </p>
+    <p>
+        <button class="clear">清空</button>
+        <button class="plus">加</button>
+        <button class="reduce">減</button>
+        <button class="take">乘</button>
+        <button class="remove">除</button>
+    </p>
+    <div>結果：<span class="result"></span></div>
+
+    <script>
+        let num1 = document.querySelector('.num-1');
+        let num2 = document.querySelector('.num-2');
+        let clearBtn = document.querySelector('.clear');
+        let plusBtn = document.querySelector('.plus');
+        let reduceBtn = document.querySelector('.reduce');
+        let takeBtn = document.querySelector('.take');
+        let removeBtn = document.querySelector('.remove');
+        let result = document.querySelector('.result');
+
+        clearBtn.addEventListener('click',function () {
+            num1.value ='';
+            num2.value ='';
+            result.innerHTML = '';
+        });
+
+        plusBtn.addEventListener('click',function(){
+            if (num1.value == '' || num2.value == ''){
+                window.alert("請輸入Num 1及 Num 2");
+            }
+            else{
+                result.innerHTML = (num1.value * 1 + num2.value * 1);
+            }
+        });
+        reduceBtn.addEventListener('click',function(){
+            if (num1.value == '' || num2.value == ''){
+                window.alert("請輸入Num 1及 Num 2");
+            }
+            else{
+                result.innerHTML = (num1.value * 1 - num2.value * 1);
+            }
+        });
+        takeBtn.addEventListener('click',function(){
+            if (num1.value == '' || num2.value == ''){
+                window.alert("請輸入Num 1及 Num 2");
+            }
+            else{
+                result.innerHTML = ((num1.value * 1) * (num2.value * 1));
+            }
+        });
+        removeBtn.addEventListener('click',function(){
+            if (num1.value == '' || num2.value == ''){
+                window.alert("請輸入Num 1及 Num 2");
+            }
+            else{
+                result.innerHTML = ((num1.value * 1) / (num2.value * 1));
+            }
+        });
+    </script>
+</body>
+</html>

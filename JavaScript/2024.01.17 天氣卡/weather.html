@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Card</title>
+    <link rel="stylesheet" href="./css/weather.css">
+    <link rel="icon" href="./img/sun.png">
+</head>
+
+<body>
+    <div class="nav">
+        <button class="btn nav-btn"><span>全省</span></button>
+        <button class="btn nav-btn"><span>北部</span></button>
+        <button class="btn nav-btn"><span>中部</span></button>
+        <button class="btn nav-btn"><span>南部</span></button>
+        <button class="btn nav-btn"><span>東部</span></button>
+        <button class="btn nav-btn"><span>外島</span></button>
+    </div>
+    <div class="ct-card"></div>
+
+    <script>
+        let btnAll = document.querySelectorAll('.nav-btn');
+        
+        let cities = [
+            ['基隆市', '新北市', '臺北市', '桃園市', '新竹市', '新竹縣', '苗栗縣', '臺中市', '南投縣', '彰化縣', '雲林縣', '嘉義市', '嘉義縣', '臺南市', '高雄市', '屏東縣', '宜蘭縣', '花蓮縣', '臺東縣', '澎湖縣', '金門縣', '連江縣'],
+            ['基隆市', '新北市', '臺北市', '桃園市', '新竹市', '新竹縣', '苗栗縣'], 
+            ['臺中市', '南投縣', '彰化縣', '雲林縣', '嘉義市', '嘉義縣'],
+            ['臺南市', '高雄市', '屏東縣'],
+            ['宜蘭縣', '花蓮縣', '臺東縣'],
+            ['澎湖縣', '金門縣', '連江縣'],
+        ];
+        let nowCities = cities[0];
+        let orgData = {};
+
+        fetchData();
+        
+        btnAll.forEach((btn, index) => {
+            btn.addEventListener('click', () => {
+                nowCities = cities[index];
+                fetchData();
+            });
+        });
+       
+        // 取得資料
+        function fetchData() {
+            let url = 'https://opendata.cwa.gov.tw/api/v1/rest/datastore/F-C0032-001?Authorization=CWA-12927F68-E94D-435D-8333-7EAC36811698'
+
+            fetch(url)
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (datas) {
+                // console.log(datas);
+                // 1.組織資料
+                organizationData(datas)
+                // console.log(orgData);
+                // 2.處理城市
+                arrangeCities();
+                // 程式位置
+
+            });
+        };
+
+        function organizationData(data) {
+            let locationAll = data.records.location;
+            // console.log(locationAll);
+            locationAll.forEach(location => {
+                let cityName = location.locationName; // 城市
+                let loc_WE_T0 = location.weatherElement[0].time[0];
+                let startTime = loc_WE_T0.startTime; // 開始時間
+                let endTime = loc_WE_T0.endTime; // 結束時間
+                let wxCondition = loc_WE_T0.parameter.parameterName; // 天氣
+                let maxT = location.weatherElement[4].time[0].parameter.parameterName; // 最高溫
+                let minT = location.weatherElement[2].time[0].parameter.parameterName; // 最低溫
+                let pop = location.weatherElement[1].time[0].parameter.parameterName; // 降雨機率
+                let ciCondition = location.weatherElement[3].time[0].parameter.parameterName; // 舒適程度
+
+                orgData[cityName] = {
+                    startTime: startTime,
+                    endTime: endTime,
+                    wxCondition: wxCondition,
+                    maxT: maxT,
+                    minT: minT,
+                    pop: pop,
+                    ciCondition: ciCondition,
+                }
+            });
+        };
+
+        function arrangeCities() {
+            let ctCard = document.querySelector('.ct-card');
+
+            ctCard.innerHTML = '';
+
+            nowCities.forEach((city, index) => {
+                let cityData = orgData[city];
+                console.log(cityData.wxCondition);
+                let pic = 0;
+                if (cityData.wxCondition === '晴時多雲'){
+                    pic = 1;
+                }else if ( cityData.wxCondition === '多雲'){
+                    pic = 2;
+                }else if ( cityData.wxCondition === '陰天' || cityData.wxCondition === '陰時多雲'){
+                    pic = 3;
+                }else if ( cityData.wxCondition === '多雲短暫陣雨' || cityData.wxCondition === '陰短暫雨' || cityData.wxCondition === '陰時多雲短暫雨'){
+                    pic = 4;
+                }else if ( cityData.wxCondition === '多雲短暫雨' || cityData.wxCondition === '陰有雨' || cityData.wxCondition === '陰時多雲有雨'){
+                    pic = 5;
+                }else{
+                    pic = 1;
+                }
+                ctCard.innerHTML += `
+                <div class="card">
+                    <div style="font-size:24px;font-weight:bold">${city}</div>
+                    <span>開始時間：${cityData.startTime}</span>
+                    <br>
+                    <span>結束時間：${cityData.endTime}</span>
+                    <br>
+                    <span>天氣：${cityData.wxCondition}</span>
+                    <br>
+                    <img src="./svg/${pic}.svg" alt="">
+                    <br>
+                    <span>最高溫：${cityData.maxT}<sup>。</sup></span>
+                    <br>
+                    <span>最低溫：${cityData.minT}<sup>。</sup></span>
+                    <div>降雨機率：${cityData.pop} %</div>
+                    <span style="font-weight:bold">舒適程度:${cityData.ciCondition}</span>
+                </div> `
+            });
+        };
+    </script>
+</body>
+
+</html>

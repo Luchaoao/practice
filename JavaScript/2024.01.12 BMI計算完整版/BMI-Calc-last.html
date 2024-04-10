@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calc</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            margin-top: 20px;
+            background-color: lightgoldenrodyellow;
+        }
+
+        .box {
+            width: 90%;
+            margin: auto;
+            padding: 40px;
+            border: 2px dashed lightblue;
+        }
+
+        .illustrate h1,
+        h2,
+        h3 {
+            font-family: '標楷體';
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .import-1,
+        .import-2,
+        .btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            background-color: lightgray;
+            padding: 5px;
+        }
+
+        .result {
+            width: 100px;
+            height: 35px;
+            background-color: #fff;
+            padding: 7px 30px;
+            border: 1px solid #111;
+        }
+
+        table,
+        th,
+        td {
+            margin: auto;
+            border: 1px dashed lightblue;
+        }
+
+        td {
+            padding: 1px 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="illustrate">
+            <h1>BMI 計算機</h1>
+            <h2>身體質量指數(Body Mass Index ，簡稱BMI)是公認用來估計肥胖程度的方法</h2>
+            <h3>BMI = 體重(公斤) / 身高的平方(公尺)</h3>
+        </div>
+        <div class="import-1">
+            性別：
+            <input id="male" type="radio" name="gender" value="0"><label for="male">男</label>
+            <input id="female" type="radio" name="gender" value="1"><label for="female">女</label>
+        </div>
+        <div class="import-2">
+            我的身高(公分)：<input type="number" class="height" min="100">
+            我的體重：<input type="number" class="weight">
+        </div>
+        <div class="btn">
+            <button class="calc">計算</button>
+            <button class="clear">重新填寫</button>&nbsp;
+            您的BMI值：<span class="result"></span>
+        </div>
+
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">BMI值</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td>男性</td>
+                    <td>女性</td>
+                </tr>
+                <tr>
+                    <td class="td-1">體重過輕</td>
+                    <td class="td-2">&lt; 20</td>
+                    <td class="td-3">&lt; 19</td>
+                </tr>
+                <tr>
+                    <td class="td-1">正常範圍</td>
+                    <td class="td-2">20-25</td>
+                    <td class="td-3">19-25</td>
+                </tr>
+                <tr>
+                    <td class="td-1">體重過重</td>
+                    <td class="td-2">25-30</td>
+                    <td class="td-3">25-30</td>
+                </tr>
+                <tr>
+                    <td class="td-1">肥胖</td>
+                    <td class="td-2">30-40</td>
+                    <td class="td-3">30-40</td>
+                </tr>
+                <tr>
+                    <td class="td-1">病態肥胖</td>
+                    <td class="td-2">&gt; 40 </td>
+                    <td class="td-3">&gt; 40</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <script>
+            let height = document.querySelector('.height');
+            let weight = document.querySelector('.weight');
+
+            let calcBtn = document.querySelector('.calc');
+            let clearBtn = document.querySelector('.clear');
+            let result = document.querySelector('.result');
+
+            let tdAll = document.querySelectorAll('td');
+            let tdAll_1 = document.querySelectorAll('.td-1');
+            let tdAll_2 = document.querySelectorAll('.td-2');
+            let tdAll_3 = document.querySelectorAll('.td-3');
+
+            clearBtn.addEventListener('click', function () {
+                let male = document.querySelector('#male');
+                let female = document.querySelector('#female');
+                male.checked = false;
+                female.checked = false;
+                height.value = '';
+                weight.value = '';
+                result.innerText = '';
+                tdWhite();
+            });
+
+            calcBtn.addEventListener('click', function () {
+                let gender = document.querySelector('input[name = "gender"]:checked');
+
+                if (!gender || height.value == '' || weight.value == '') {
+                    alert('請填寫完整資料');
+                    return;
+                };
+
+                let doRowNew = 0;
+
+                tdWhite();
+
+                if (gender.value === '0') {
+                    let bmi = tdBmiBoy();
+                    result.innerText = bmi.toFixed(2);
+                } else {
+                    let bmi = tdBmiGirl();
+                    result.innerText = bmi.toFixed(2);
+                };
+            });
+
+            function tdAllBoy() {
+                tdAll_1[doRowNew].style.backgroundColor = 'lightgray';
+                tdAll_2[doRowNew].style.backgroundColor = 'lightgray';
+            };
+
+            function tdAllGirl() {
+                tdAll_1[doRowNew].style.backgroundColor = 'lightgray';
+                tdAll_3[doRowNew].style.backgroundColor = 'lightgray';
+            };
+
+            function tdWhite() {
+                for (let i = 0; i < tdAll.length; i++) {
+                    tdAll[i].style.backgroundColor = 'transparent';
+                }
+            };
+
+            function tdBmiBoy() {
+                let bmi = weight.value / (height.value / 100) ** 2;
+
+                if (bmi < 20) {
+                    doRowNew = 0;
+                    tdAllBoy();
+                } else if (bmi > 20 && bmi <= 25) {
+                    doRowNew = 1;
+                    tdAllBoy();
+                } else if (bmi > 25 && bmi <= 30) {
+                    doRowNew = 2;
+                    tdAllBoy();
+                } else if (bmi > 30 && bmi <= 40) {
+                    doRowNew = 3;
+                    tdAllBoy();
+                } else {
+                    doRowNew = 4;
+                    tdAllBoy();
+                }
+                return bmi;
+            };
+
+            function tdBmiGirl() {
+                let bmi = weight.value / (height.value / 100) ** 2;
+
+                if (bmi < 19) {
+                    doRowNew = 0;
+                    tdAllGirl();
+                } else if (bmi > 19 && bmi <= 25) {
+                    doRowNew = 1;
+                    tdAllGirl();
+                } else if (bmi > 25 && bmi <= 30) {
+                    doRowNew = 2;
+                    tdAllGirl();
+                } else if (bmi > 30 && bmi <= 40) {
+                    doRowNew = 3;
+                    tdAllGirl();
+                } else {
+                    doRowNew = 4;
+                    tdAllGirl();
+                }
+                return bmi;
+            };
+
+        </script>
+    </div>
+</body>
+
+</html>

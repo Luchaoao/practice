@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>game-hw</title>
+    <link rel="stylesheet" href="./css/game-hw.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="box-1">
+            <span>Personal</span>
+            <br>
+            <input id="paper" type="radio" name="pcs" value="1"  ><label for="paper"><img src="./img/pcs-1.png" alt=""></label>
+            <br>
+            <input id="scissor" type="radio" name="pcs" value="2"  ><label for="scissor"><img src="./img/pcs-2.png" alt=""></label>
+            <br>
+            <input id="stone" type="radio" name="pcs" value="3" ><label for="stone"><img src="./img/pcs-3.png" alt=""></label>
+            </button>
+        </div>
+        <div class="box-2">
+            <span>v . s</span>
+            <span class="result"></span>
+            <button class="start">開始</button>
+        </div>
+        <div class="box-3">
+            <span>Computer</span>
+            <img id="computer-random" src="./img/pcs-1.png" alt="">
+        </div>
+
+        <script>
+            let startBtn = document.querySelector('.start');
+            let computerRandom = document.querySelector('#computer-random')
+
+            startBtn.addEventListener('click', () => {
+                compete();
+            });
+
+            function compete() {
+                let pcs = document.querySelector('input[name = "pcs"]:checked');
+                let result = document.querySelector('.result');
+                let computer = Math.ceil(Math.random() * 3);
+                
+                let pcsValue = pcs.value;
+
+                if (pcsValue === '1' && computer === 3){
+                    computerRandom.src = `./img/pcs-${computer}.png`;
+                    result.innerHTML = 'You Win.';
+                }else if (pcsValue === '2' && computer === 1){
+                    computerRandom.src = `./img/pcs-${computer}.png`;
+                    result.innerHTML = 'You Win.';
+                }else if (pcsValue === '3' && computer === 2){
+                    computerRandom.src = `./img/pcs-${computer}.png`;
+                    result.innerHTML = 'You Win.';
+                }else if (pcsValue == computer){
+                    computerRandom.src = `./img/pcs-${computer}.png`;
+                    result.innerHTML = 'Its a tie.';
+                }else{
+                    computerRandom.src = `./img/pcs-${computer}.png`;
+                    result.innerHTML = 'You Loss.';
+                };
+            }
+        </script>
+    </div>
+</body>
+
+</html>

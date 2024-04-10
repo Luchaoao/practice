@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0 10%;
+            background-color: #FAEDCD;
+        }
+        .nav{
+            z-index: 5;
+            width: calc(80% - 20px);
+            height: calc(80px - 20px);
+            position: fixed;
+            padding: 10px;
+        }
+        .logo{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-image: url(./img/logo.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            float: left;
+            margin-top: 5px;
+        }
+        .logo:hover{
+            transform: scale(1.2) rotate(45deg); 
+        }
+        .nav-btn-all{
+            float:right;
+        }
+        .nav-btn{
+            background-color: #D4A373;
+            width: 80px;
+            height: 40px;
+            float: left;
+            margin-left: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            color: white;
+            font-size: 25px;
+            font-family: Lato,sans-serif;
+            font-weight: 400;
+            text-align: center;
+            line-height: 40px;
+            text-decoration: none;
+        }
+        .nav-btn-1:link{
+            color:#F6BD60 ;
+        }
+        .nav-btn-2:link{
+            color:#F6AE2D;
+        }
+        .nav-btn-3:link{
+            color:#F26419 ;
+        }
+        .nav-btn-1:visited{
+            color:#87BBA2 ;
+        }
+        .nav-btn-2:visited{
+            color:#55828B ;
+        }
+        .nav-btn-3:visited{
+            color:#3B6064 ;
+        }
+        .nav-btn-1:hover{
+            background-color:#CCD5AE ;
+        }
+        .nav-btn-2:hover{
+            background-color:#F5CAC3 ;
+        }
+        .nav-btn-3:hover{
+            background-color:#F28482 ;
+        }
+        .nav-btn-1:active{
+            background-color:#6C584C ;
+        }
+        .nav-btn-2:active{
+            background-color:#A98467 ;
+        }
+        .nav-btn-3:active{
+            background-color:#ADC178 ;
+        }
+        .all{
+            width: 100%;
+            height: 100vh;
+            margin: auto;
+            padding-top: 80px;
+        }
+        .banner{
+            width: 100%;
+            height: 50vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+            background-attachment: fixed;
+            padding-top: 50vh;
+            position: relative;
+        }
+        #banner-1{
+            background-image: url(./img/8.jpg);
+        }
+        #banner-2{
+            background-image: url(./img/9.jpg);
+        }
+        #banner-3{
+            background-image: url(./img/10.jpg);
+        }
+        .mask{
+            width: 100%;
+            height: 50vh;
+            background-color: #111;
+            opacity: 40%;
+        }
+        .btn{
+            width: 150px;
+            height: 60px;
+            background-color: #CCD5AE;
+            border-radius: 15px;
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            color: white;
+            font-size: 50px;
+            font-family: Lato,sans-serif;
+            font-weight: 400;
+            text-align: center;
+            line-height: 60px;
+        }
+        .btn-1:hover{
+            transform: scale(1.2);
+            background-color: #8338EC;
+        }
+        .btn-2:hover{
+            transform: rotate(0.5turn);
+            background-color:#FB5607 ;
+        }
+        .btn-3:hover{
+            transform: scale(1.5);
+            background-color: #3A86FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <div class="logo"></div>
+        <div class="nav-btn-all">
+            <a href="#banner-1" class="nav-btn nav-btn-1">1</a>
+            <a href="#banner-2" class="nav-btn nav-btn-2">2</a>
+            <a href="#banner-3" class="nav-btn nav-btn-3">3</a>
+        </div>
+    </div>
+    <div class="all">
+        <div id="banner-1" class="banner">
+            <div class="mask"></div>
+            <div class="btn btn-1">1</div>
+        </div>
+        <div id="banner-2" class="banner">
+            <div class="mask"></div>
+            <div class="btn btn-2">2</div>
+        </div>
+        <div id="banner-3" class="banner">
+            <div class="mask"></div>
+            <div class="btn btn-3">3</div>
+        </div>
+    </div>
+</body>
+</html>

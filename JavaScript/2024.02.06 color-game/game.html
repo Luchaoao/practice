@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #FAEDCD;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        p {
+            font-size: 72px;
+            font-family: Comic Sans MS;
+            font-weight: bold;
+            text-align: center;
+            line-height: 250px;
+            text-shadow: 0 1px 0 #ccc,
+
+                0 2px 0 #c9c9c9,
+
+                0 3px 0 #bbb,
+
+                0 4px 0 #b9b9b9,
+
+                0 5px 0 #aaa,
+
+                0 6px 1px rgba(0, 0, 0, .1),
+
+                0 0 5px rgba(0, 0, 0, .1),
+
+                0 1px 3px rgba(0, 0, 0, .3),
+
+                0 3px 5px rgba(0, 0, 0, .2),
+
+                0 5px 10px rgba(0, 0, 0, .25),
+
+                0 10px 10px rgba(0, 0, 0, .2),
+
+                0 20px 20px rgba(0, 0, 0, .15);
+        }
+
+        span {
+            font-size: 24px;
+            font-family: Comic Sans MS;
+            font-weight: bold;
+            text-align: center;
+            line-height: 150px;
+            text-shadow: 0 1px 0 #ccc,
+
+                0 2px 0 #c9c9c9,
+
+                0 3px 0 #bbb,
+
+                0 4px 0 #b9b9b9,
+
+                0 5px 0 #aaa,
+
+                0 6px 1px rgba(0, 0, 0, .1),
+
+                0 0 5px rgba(0, 0, 0, .1),
+
+                0 1px 3px rgba(0, 0, 0, .3),
+
+                0 3px 5px rgba(0, 0, 0, .2),
+
+                0 5px 10px rgba(0, 0, 0, .25),
+
+                0 10px 10px rgba(0, 0, 0, .2),
+
+                0 20px 20px rgba(0, 0, 0, .15);
+        }
+
+        .btn {
+            width: 50px;
+            height: 40px;
+            border-radius: 9px;
+        }
+
+        .btn,
+        .btn:focus {
+            position: relative;
+            min-width: 100px;
+            background: none;
+            border: none;
+            color: #58afd1;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            box-shadow: inset 0 0 0 4px #58afd1;
+            transition: color 0.25s 0.0833333333s;
+            padding: 10px 10px;
+        }
+
+        .btn:before,
+        .btn:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            height: 0;
+            bottom: 0;
+            right: 0;
+            border: 0 solid transparent;
+            box-sizing: border-box;
+        }
+
+        .btn:before {
+            border-bottom-width: 4px;
+            border-left-width: 4px;
+        }
+
+        .btn:after {
+            border-top-width: 4px;
+            border-right-width: 4px;
+        }
+
+        .btn:hover {
+            color: #ffe593;
+        }
+
+        .btn:hover:before,
+        .btn:hover:after {
+            border-color: #ffe593;
+            transition: border-color 0s, width 0.25s, height 0.25s;
+            width: 100%;
+            height: 100%;
+            border-radius: 9px;
+        }
+
+        .btn:hover:before {
+            transition-delay: 0s, 0s, 0.25s;
+        }
+
+        .btn:hover:after {
+            transition-delay: 0s, 0.25s, 0s;
+        }
+
+        .play-btn {
+            display: flex;
+        }
+
+        .start-game,
+        .continue-game {
+            margin: auto;
+            margin-bottom: 20px;
+        }
+
+        .pause-game,
+        .restart-game {
+            margin-right: 100px;
+        }
+
+        .blk {
+            margin-bottom: 50px;
+        }
+
+        .big-box {
+            width: 520px;
+            height: 520px;
+            background-color: lightgray;
+            margin: auto;
+            padding: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            border-radius: 10px;
+        }
+
+        .box {
+            width: 50%;
+            height: 50%;
+            border: 5px solid lightgray;
+            border-radius: 10px;
+        }
+
+        .answer {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="homepage">
+        <p>Color Game</p>
+        <!-- <div class="logo"></div> -->
+        <div class="start-game btn">start
+        </div>
+        <!-- <div class="continue-game btn">continue</div> -->
+    </div>
+    <div class="playgame">
+        <span>
+            Time：
+            <span id="demo-counter"></span>
+        </span>
+        <div class="blk">
+            <div class="big-box"></div>
+        </div>
+        <div class="play-btn">
+            <div class="pause-game btn">pause</div>
+            <div class="restart-game btn">back</div>
+            <div class="stop-game btn">exit</div>
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+        let homepage = document.querySelector('.homepage');
+        let playgame = document.querySelector('.playgame');
+        let startGame = document.querySelector('.start-game');
+        // let continueGame = document.querySelector('.continue-game');
+        let pauseGame = document.querySelector('.pause-game');
+        let restartGame = document.querySelector('.restart-game');
+        let stopGame = document.querySelector('.stop-game');
+        let blk = document.querySelector('.blk');
+
+        let demoCounter = document.querySelector("#demo-counter");
+        let counterInterval;
+        const totalTime = 50;
+        let counter = totalTime;
+
+        playgame.classList.add('hidden');
+        // blk.classList.add('hidden');
+        // continueGame.classList.add('hidden');;
+
+        myStartGame();
+        myPauseGame();
+        myRestartGame();
+        // myContinueGame();
+        myStopGame();
+
+        function myStartGame() {
+            startGame.addEventListener('click', () => {
+                counter = totalTime;
+                // 先清空時間html 會有上一次殘留數值
+                demoCounter.innerHTML = '';
+                homepage.classList.add('hidden');
+                playgame.classList.remove('hidden');
+                restartGame.classList.add('hidden');
+                counterInterval = setInterval(counterTimer, 1000);
+            });
+        }
+        function myPauseGame() {
+            pauseGame.addEventListener('click', () => {
+                // homepage.classList.remove('hidden');
+                // playgame.classList.add('hidden');
+                // body.style.backgroundColor = 'black';
+                restartGame.classList.remove('hidden');
+                blk.classList.add('hidden');
+                // continueGame.classList.remove('hidden');
+                counterStop();
+            });
+        }
+
+        function myRestartGame() {
+            restartGame.addEventListener('click', () => {
+                homepage.classList.add('hidden');
+                playgame.classList.remove('hidden');
+                restartGame.classList.add('hidden');
+                blk.classList.remove('hidden');
+                counterInterval = setInterval(counterTimer, 1000);
+            });
+        };
+
+        // function myContinueGame() {
+        //     continueGame.addEventListener('click', () => {
+        //         homepage.classList.add('hidden');
+        //         playgame.classList.remove('hidden');
+        //         counterInterval = setInterval(counterTimer, 1000);
+        //     });
+        // };
+
+        function myStopGame() {
+            stopGame.addEventListener('click', () => {
+                homepage.classList.remove('hidden');
+                playgame.classList.add('hidden');
+                // continueGame.classList.add('hidden');
+                counterStop();
+            });
+        }
+
+        function counterTimer() {
+            if (counter >= 0) {
+                demoCounter.innerHTML = counter--
+            } else {
+                alert('Time Out!');
+                counterStop();
+                homepage.classList.remove('hidden');
+                playgame.classList.add('hidden');
+                // continueGame.classList.add('hidden');
+            };
+        }
+        function counterStop() {
+            clearInterval(counterInterval);
+        }
+
+        let level = 2;
+        let size = 100 / level;
+        let bigBox = document.querySelector('.big-box');
+        let count = 0;
+
+        game();
+
+        function game() {
+            // 1.清空
+            bigBox.innerHTML = '';
+
+            // 2. 產生顏色 box
+            let color = `rgb(${Math.floor(Math.random() * 255) + 1},${Math.floor(Math.random() * 255) + 1},${Math.floor(Math.random() * 255) + 1})`;
+
+            for (let i = 0; i < level ** 2; i++) {
+                bigBox.innerHTML += `<div class = "box" style = "width:${size}%;height:${size}%;background-color: ${color};">`;
+            }
+
+            // 3.產生解答
+            let randomAnswer = Math.floor(Math.random() * level ** 2 + 1); // 為了配合css使用 nth-of-type()才加 1
+            let answerBox = document.querySelector(`.big-box .box:nth-of-type(${randomAnswer})`);
+            answerBox.classList.add("answer");
+
+            // 4.為遊戲增添難度 opacity是浮動的
+            answerBox.style.opacity = `${0.87 + level * 0.005}`;
+
+            // 5.互動
+            let answerBtn = document.querySelector('.answer');
+            answerBtn.addEventListener('click', function () {
+                count += 1;
+                if (count === level) {
+                    level += 1;
+                    size = 100 / level;
+                    count = 0;
+                };
+                game();
+            });
+        }
+    </script>
+</body>
+
+</html>

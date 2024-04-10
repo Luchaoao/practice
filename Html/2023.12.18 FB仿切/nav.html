@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0;
+            height: 3000px;
+            background-color: #18191a;
+        }
+        #nav{
+            width: 100%;
+            height: 60px;
+            background-color: #18191a;
+            position: fixed;/* 固定式導覽列 */
+            z-index: 5;/* 圖層 */
+        }
+        #fb{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-image: url(./svg/svgexport-1.svg);
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 10px;
+            left: 2px;
+        }
+        #search{
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background-image: url(./svg/svgexport-3.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 55px;
+            top: 20px;
+        }
+        #search2{
+            width: 175px;
+            height: 30px;
+            border-radius: 20px ;
+            background-color: lightgray;
+            color: gray;
+            line-height: 34px;
+            text-indent: 33px;
+            font-family: '標楷體';
+            position: absolute;
+            left: 48px;
+            top: 17px;
+        }
+        #home{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-4.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 600px;
+            top: 20px;
+        }
+        #friend{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-5.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 750px;
+            top: 20px;
+        }
+        #video{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-6.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 900px;
+            top: 20px;
+        }
+        #shop{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-7.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 1050px;
+            top: 20px;
+        }
+        #game{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-8.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 1200px;
+            top: 20px;
+        }
+        #spot9{
+            width: 25px;
+            height: 25px;
+            background-image: url(./svg/svgexport-14.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 1737px;
+            top: 22px;
+        }
+        #spot92{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #373737;
+            position: absolute;
+            left: 1730px;
+            top: 15px;
+        }
+        #messenger{
+            width: 25px;
+            height: 25px;
+            background-image: url(./svg/svgexport-13.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 1782px;
+            top: 22px;
+        }
+        #messenger2{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #373737;
+            position: absolute;
+            left: 1775px;
+            top: 15px;
+        }
+        #notify{
+            width: 25px;
+            height: 25px;
+            background-image: url(./svg/svgexport-12.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            left: 1828px;
+            top: 22px;
+        }
+        #notify2{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #373737;
+            position: absolute;
+            left: 1820px;
+            top: 15px;
+        }
+        #profile{
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-image: url(./img/images.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: absolute;
+            top: 10px;
+            left: 1868px;
+        }
+        #all{
+            width: 80%;
+            height: 1000px;
+            background-color: #18191a;
+            margin: auto;
+            padding-top: 60px;
+        }
+        #banner{
+            width: 100%;
+            height: 500px;
+            background-image: url(./img/1.jpg);
+            background-size: cover;
+            position: relative;
+        }
+        #avatar{
+            background-color: aqua;
+            width: 175px;
+            height: 175px;
+            position: absolute;
+            bottom: -145px;
+            left: 100px;
+            border-radius: 50%;
+            background-image: url(./img/images.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        #name{
+            width: 150px;
+            height: 100px;
+            font-size: 35px;
+            font-family: '標楷體';
+            color: white;
+            position: absolute;
+            bottom: -115px;
+            left: 300px;
+        }
+        #follower{
+            width: 300px;
+            height: 100px;
+            font-size: 18px;
+            font-family: '標楷體';
+            color: white;
+            position: absolute;
+            bottom: -163px;
+            left: 306px;
+        }
+        #send{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-13.svg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            z-index: 2;
+            position: absolute;
+            bottom: -134px;
+            left: 1270px;
+        }
+        #send2{
+            width: 114px;
+            height: 39px;
+            background-color: #373737;
+            border-radius: 10px;
+            color: white;
+            position: absolute;
+            bottom: -138px;
+            left: 1265px;
+            line-height: 39px;
+            text-indent: 42px;
+        }
+        #add{
+            width: 114px;
+            height: 39px;
+            background-image: url(./img/ImGMiWz-mEy.png);
+            background-repeat: no-repeat;
+            z-index: 2;
+            position: absolute;
+            bottom: -145px;
+            left: 1400px;
+            }
+        #add2{
+            width: 95px;
+            height: 39px;
+            background-color: blue;
+            border-radius: 10px;
+            color: white;
+            position: absolute;
+            bottom: -139px;
+            left: 1392px;
+            line-height: 39px;
+            text-indent: 42px;
+        }
+        #more{
+            width: 30px;
+            height: 30px;
+            background-image: url(./svg/svgexport-11.svg);
+            background-repeat: no-repeat;
+            border-radius: 10px;
+            z-index: 2;
+            position: absolute;
+            bottom: -144px;
+            left: 1513px;
+        }#more2{
+            width: 39px;
+            height: 39px;
+            background-color: #373737;
+            border-radius: 10px;
+            color: white;
+            position: absolute;
+            bottom: -140px;
+            left: 1500px;
+            line-height: 39px;
+            text-indent: 42px;
+        }
+        #line{
+            height: 1px;
+            width: 92%;
+            border: 1px solid gray ;
+            position: absolute;
+            bottom: -167px;
+            left: 126px;
+        }
+    </style>
+</head>
+<body>
+    <div id="nav">
+        <div id="fb"></div>
+        <div id="search"></div>
+        <div id="search2">搜尋Facebook</div>
+        <div id="home"></div>
+        <div id="friend"></div>
+        <div id="video"></div>
+        <div id="shop"></div>
+        <div id="game"></div>
+        <div id="spot9"></div>
+        <div id="spot92"></div>
+        <div id="messenger"></div>
+        <div id="messenger2"></div>
+        <div id="notify"></div>
+        <div id="notify2"></div>
+        <div id="profile"></div>
+    </div>
+    <div id="all">
+        <div id="banner">
+            <div id="avatar"></div>
+            <div id="name">壹貳參</div>
+            <div id="follower">5472位追蹤者。正在追蹤0人</div>
+            <div id="send"></div>
+            <div id="send2">發送訊息</div>
+            <div id="add"></div>
+            <div id="add2">加朋友</div>
+            <div id="more"></div>
+            <div id="more2"></div>
+            <div id="line"></div>
+        </div>
+    </div>
+</body>
+</html>

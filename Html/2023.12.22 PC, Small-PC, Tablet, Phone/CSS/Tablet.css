@@ -1,0 +1,89 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    margin: 0;
+}
+a{
+    text-decoration: none;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+}
+.nav{
+    width: 100%;
+    height: 100px;
+    background-color: lightgrey;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+    margin-left: 50px;
+    background-image: url(../img/logo.jpg);   
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 50px;
+}
+.nav-btn-all{
+    float: right;
+    margin-top: -110px;
+}
+.nav-btn{
+    border-radius: 20px;
+    color: #111;
+    font-size: 16px;
+    font-family: Lato,sans-serif;
+    font-weight: bold;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.nav-btn-1:visited,.nav-btn-2:visited,.nav-btn-3:visited{
+    color: #111;
+}
+.nav-btn-1:hover,.nav-btn-2:hover,.nav-btn-3:hover{
+    color: bisque;
+}
+.nav-btn-1:active,.nav-btn-2:active,.nav-btn-3:active{
+    color: blue;
+}
+.content-all{
+    width: 100%;
+    height: calc(100% - 100px);
+    padding: 50px 20px 20px 20px;
+}
+.content{
+    width: calc(80% - 40px);
+    height: calc(800px - 70px);
+    margin: auto;
+}
+.img{     
+    height: calc(50% - 5px);
+    float: left;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.img-1{
+    width: 100%;
+    margin-bottom: 10px;
+    background-image: url(../img/1.jpg);
+}
+.img-2{
+    width: calc(50% - 5px);
+    margin-right: 10px;
+    background-image: url(../img/2.jpg);
+}
+.img-3{
+    width: calc(50% - 5px);
+    background-image: url(../img/3.jpg);
+}
+.img-1:hover{
+    transform: scale(0.5);
+}
+.img-2:hover{
+    transform: rotate(0.5turn);
+}
+.img-3:hover{
+    transform: rotate(0.5turn);
+}
